@@ -16,15 +16,15 @@ class UserSeeder extends Seeder
    
 
         $user = User::create([
-            'nama' => 'Staf',
+            'nama' => 'Admin Prodi',
             'alamat' => 'Sentani',
             'no_hp' => '082198159714',
-            'email' => 'staf@master.com',
-            'password' =>  bcrypt('staf@master.com'),
+            'email' => 'adminprodi@master.com',
+            'password' =>  bcrypt('adminprodi@master.com'),
             'jenis_kelamin' => '',
 
         ]);
-        $user->assignRole('staf');
+        $user->assignRole('adminprodi');
 
 
 
@@ -51,14 +51,14 @@ class UserSeeder extends Seeder
 
 
         $user = User::create([
-            'nama' => 'KAPRODI',
+            'nama' => 'Samuel',
             'alamat' => 'Sentani',
             'no_hp' => '082198159721',
-            'email' => 'kaprodi@gmail.com',
-            'password' =>  bcrypt('kaprodi@gmail.com'),
+            'email' => 'samuel@gmail.com',
+            'password' =>  bcrypt('samuel@gmail.com'),
             'jenis_kelamin' => '',
 
         ]);
-        $user->assignRole('kaprodi');
+        $user->assignRole('dosen');
     }
 }

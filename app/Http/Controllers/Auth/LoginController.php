@@ -26,7 +26,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/dashboard';
 
     /**
      * Create a new controller instance.
@@ -41,7 +41,7 @@ class LoginController extends Controller
 
     protected function authenticated(Request $request, $user)
     {
-        if($user->HasRole('staf') || $user->HasRole('mahasiswa') || $user->HasRole('kaprodi')  ){
+        if($user->HasRole('adminprodi') || $user->HasRole('mahasiswa') || $user->HasRole('dosen')  ){
             return redirect('/dashboard');
         };
 
