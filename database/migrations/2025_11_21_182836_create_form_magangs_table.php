@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('berkas')->nullable();        // file SK / surat / dokumen
             $table->date('tanggal')->nullable();
             $table->text('ket')->nullable();             // keterangan tambahan
-
+            $table->string('status')->nullable();
             // foreign key ke tabel magangs
             $table->unsignedBigInteger('id_magang');
             $table->foreign('id_magang')
