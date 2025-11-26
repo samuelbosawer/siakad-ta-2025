@@ -1,0 +1,88 @@
+
+
+     
+@extends('admin.layout.tamplate')
+
+@section('content')
+<div class="container-xxl flex-grow-1 container-p-y">
+  {{-- <h4 class="text-muted py-3 mb-4"><a href="/{{ Request::segment(1).'/'.Request::segment(2) }}" class=" fw-light">{{  Request::segment(2) }}</a> </h4> --}}
+
+  <div class="row ">
+    <div class="col-12">
+        
+        <div class="card">
+                <h5 class="card-header">Data Mahasiswa </h5>
+                <div class="table-responsive text-nowrap p-3">
+                  <div class="row">
+                    <div class="col-6 my-3">
+                      <a class="btn btn-primary" href="{{ route('dashboard.mahasiswa.tambah') }}">Tambah Data Mahasiswa <i class="bx bx-plus me-1"></i></a>
+                    </div>
+                    <div class="col-6 my-3">
+                      <form action="" method="get">
+                       <div class="input-group">
+                        <input
+                          type="text"
+                          class="form-control"
+                          placeholder="Masukan kata kunci"
+                          aria-label="Masukan kata kunci"
+                          aria-describedby="button-addon2"
+                          name="s" value="{{ request()->s ?? '' }}"
+                        />
+                        <button type="submit" class="btn btn-primary" type="button" id="button-addon2">Cari</button>
+                        </form>
+                      </div>
+
+                    </div>
+                  </div>
+                  <table class="table table-bordered">
+                    <thead class="">
+                      <tr class="bg-primary ">
+                        <th class="text-white text-center  p-3 fw-bolder" width="10px" hight="10px" >No</th>
+                        <th class="text-white text-center  p-3 fw-bolder">Nama</th>
+                        <th class="text-white text-center  p-3 fw-bolder">No Hp</th>
+                        <th class="text-white text-center  p-3 fw-bolder">Email</th> 
+                        <th class="text-white text-center  p-3 fw-bolder">Semester</th> 
+                        <th class="text-white text-center  p-3 fw-bolder"></th> 
+                      </tr>
+                    </thead>
+                    <tbody class="table-border-bottom-0">
+                      @foreach ($datas as $data )
+                      <tr>
+                        <td>{{ ++$i }}</td>
+                        <td class="fw-bolder"> <a href="{{ route('dashboard.mahasiswa.ubah', $data->id) }}">{{ $data->nama_depan.' '.$data->nama_belakang }}</a></td>
+                        <td>{{ $data->no_hp }}</td>
+                        <td>{{ $data->user->email }}</td>
+                        <td class="text-center">{{ $data->semester }}</td>
+                        <td class="text-center">
+                          <div class="dropdown">
+                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                              <i class="bx bx-dots-vertical-rounded"></i>
+                            </button>
+                            <div class="dropdown-menu">
+                              <a class="{{ route('dashboard.mahasiswa.detail',$data->id) }}" href="javascript:void(0);"
+                                ><i class="bx bx-box me-1"></i> Detail</a
+                              >
+                              <a class="{{ route('dashboard.mahasiswa.ubah',$data->id) }}" href="javascript:void(0);"
+                                ><i class="bx bx-edit-alt me-1"></i> Ubah</a
+                              >
+                              <a class="{{ route('dashboard.mahasiswa.detail',$data->id) }}" href="javascript:void(0);"
+                                ><i class="bx bx-trash me-1"></i> Hapus</a
+                              >
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      @endforeach
+                     
+                    
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <!-- Bootstrap Table with Header - Light -->
+
+    </div>
+  </div>
+
+@endsection
+      

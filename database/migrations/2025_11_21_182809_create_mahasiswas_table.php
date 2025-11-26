@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('semester')->nullable();
             $table->text('alamat')->nullable();
             $table->string('no_hp')->nullable();
-            $table->enum('jenis_kelamin', ['L', 'P']); // L = Laki-laki, P = Perempuan
+            $table->string('jenis_kelamin')->nullable(); 
             $table->string('tempat_lahir')->nullable();
             $table->date('tanggal_lahir')->nullable();
             $table->unsignedBigInteger('user_id');
