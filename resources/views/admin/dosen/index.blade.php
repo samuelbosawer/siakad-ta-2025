@@ -11,15 +11,15 @@
     <div class="col-12">
         
         <div class="card">
-                <h5 class="card-header">Data Mahasiswa </h5>
+                <h5 class="card-header">Data Dosen </h5>
                 <div class="table-responsive text-nowrap p-3">
                   <div class="row">
                     <div class="col-6 my-3">
-                      <a class="btn btn-primary" href="{{ route('dashboard.mahasiswa.tambah') }}">Tambah Data Mahasiswa <i class="bx bx-plus me-1"></i></a>
+                      <a class="btn btn-primary" href="{{ route('dashboard.dosen.tambah') }}">Tambah Data Dosen <i class="bx bx-plus me-1"></i></a>
                     </div>
                     <div class="col-6 my-3">
                       @include('admin.layout.search')
-                      </div>
+                    </div>
 
                     </div>
                   </div>
@@ -30,7 +30,6 @@
                         <th class="text-white text-center  p-3 fw-bolder">Nama</th>
                         <th class="text-white text-center  p-3 fw-bolder">No Hp</th>
                         <th class="text-white text-center  p-3 fw-bolder">Email</th> 
-                        <th class="text-white text-center  p-3 fw-bolder">Semester</th> 
                         <th class="text-white text-center  p-3 fw-bolder"></th> 
                       </tr>
                     </thead>
@@ -38,24 +37,23 @@
                       @foreach ($datas as $data )
                       <tr>
                         <td>{{ ++$i }}</td>
-                        <td class="fw-bolder"> <a href="{{ route('dashboard.mahasiswa.ubah', $data->id) }}">{{ $data->nama_depan.' '.$data->nama_belakang }}</a></td>
+                        <td class="fw-bolder"> <a href="{{ route('dashboard.dosen.ubah', $data->id) }}">{{ $data->nama_depan.' '.$data->nama_belakang }}</a></td>
                         <td>{{ $data->no_hp }}</td>
                         <td>{{ $data->user->email }}</td>
-                        <td class="text-center">{{ $data->semester }}</td>
                         <td class="text-center">
                           <div class="dropdown">
                             <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
                               <i class="bx bx-dots-vertical-rounded"></i>
                             </button>
                             <div class="dropdown-menu">
-                              <a class="dropdown-item" href="{{ route('dashboard.mahasiswa.detail', $data->id) }}"
+                              <a class="dropdown-item" href="{{ route('dashboard.dosen.detail', $data->id) }}"
                                 >
                                 <i class="bx bx-box me-1"></i> Detail</a
                               >
-                              <a class="dropdown-item" href="{{ route('dashboard.mahasiswa.ubah', $data->id )}}"><i class="bx bx-edit-alt me-1"></i> Ubah</a
+                              <a class="dropdown-item" href="{{ route('dashboard.dosen.ubah', $data->id )}}"><i class="bx bx-edit-alt me-1"></i> Ubah</a
                               >
 
-                            <form action="{{ route('dashboard.mahasiswa.hapus', $data->id) }}" 
+                            <form action="{{ route('dashboard.dosen.hapus', $data->id) }}" 
                                     method="POST" 
                                     onsubmit="return confirm('Yakin ingin menghapus data ini?');">
                                   @csrf
