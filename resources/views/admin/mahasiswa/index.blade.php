@@ -59,17 +59,26 @@
                               <i class="bx bx-dots-vertical-rounded"></i>
                             </button>
                             <div class="dropdown-menu">
-                              <a class="{{ route('dashboard.mahasiswa.detail',$data->id) }}" href="javascript:void(0);"
-                                ><i class="bx bx-box me-1"></i> Detail</a
+                              <a class="dropdown-item" href="{{ route('dashboard.mahasiswa.detail', $data->id) }}"
+                                >
+                                <i class="bx bx-box me-1"></i> Detail</a
                               >
-                              <a class="{{ route('dashboard.mahasiswa.ubah',$data->id) }}" href="javascript:void(0);"
-                                ><i class="bx bx-edit-alt me-1"></i> Ubah</a
+                              <a class="dropdown-item" href="{{ route('dashboard.mahasiswa.ubah', $data->id )}}"><i class="bx bx-edit-alt me-1"></i> Ubah</a
                               >
-                              <a class="{{ route('dashboard.mahasiswa.detail',$data->id) }}" href="javascript:void(0);"
-                                ><i class="bx bx-trash me-1"></i> Hapus</a
-                              >
+
+                            <form action="{{ route('dashboard.mahasiswa.hapus', $data->id) }}" 
+                                    method="POST" 
+                                    onsubmit="return confirm('Yakin ingin menghapus data ini?');">
+                                  @csrf
+                                  @method('DELETE')
+
+                                  <button type="submit" class="dropdown-item text-danger">
+                                      <i class="bx bx-trash me-1"></i> Hapus
+                                  </button>
+                              </form>
                             </div>
                           </div>
+                          
                         </td>
                       </tr>
                       @endforeach

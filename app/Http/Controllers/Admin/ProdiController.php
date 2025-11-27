@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Prodi;
+use RealRashid\SweetAlert\Facades\Alert;
+
 class ProdiController extends Controller
 {
      // Tampilkan semua data
@@ -77,10 +79,9 @@ class ProdiController extends Controller
     }
 
     $prodi->save();
-    return redirect()
-        ->route('dashboard.prodi')
-        ->with('success', 'Data Program Studi berhasil diperbarui.');
-    }
+    Alert::success('Berhasil', 'Ubah data berhasil');
+    return redirect()->route('dashboard.prodi');
+}
 
     // Hapus data
     public function destroy($id)
