@@ -11,11 +11,11 @@
     <div class="col-12">
         
         <div class="card">
-                <h5 class="card-header">Data Mahasiswa </h5>
+                <h5 class="card-header">Data Magang </h5>
                 <div class="table-responsive text-nowrap p-3">
                   <div class="row">
                     <div class="col-6 my-3">
-                      <a class="btn btn-primary" href="{{ route('dashboard.mahasiswa.tambah') }}">Tambah Data Mahasiswa <i class="bx bx-plus me-1"></i></a>
+                      <a class="btn btn-primary" href="{{ route('dashboard.magang.tambah') }}">Tambah Data Magang <i class="bx bx-plus me-1"></i></a>
                     </div>
                     <div class="col-6 my-3">
                       @include('admin.layout.search')
@@ -27,10 +27,10 @@
                     <thead class="">
                       <tr class="bg-primary ">
                         <th class="text-white text-center  p-3 fw-bolder" width="10px" hight="10px" >No</th>
-                        <th class="text-white text-center  p-3 fw-bolder">Nama Magang</th>
-                        <th class="text-white text-center  p-3 fw-bolder">No Hp</th>
-                        <th class="text-white text-center  p-3 fw-bolder">Email</th> 
+                        <th class="text-white text-center  p-3 fw-bolder">Magang</th>
+                        <th class="text-white text-center  p-3 fw-bolder">Tanggal</th>
                         <th class="text-white text-center  p-3 fw-bolder">Semester</th> 
+                        <th class="text-white text-center  p-3 fw-bolder">Dosen</th> 
                         <th class="text-white text-center  p-3 fw-bolder"></th> 
                       </tr>
                     </thead>
@@ -38,24 +38,24 @@
                       @foreach ($datas as $data )
                       <tr>
                         <td>{{ ++$i }}</td>
-                        <td class="fw-bolder"> <a href="{{ route('dashboard.mahasiswa.ubah', $data->id) }}">{{ $data->nama_depan.' '.$data->nama_belakang }}</a></td>
-                        <td>{{ $data->no_hp }}</td>
-                        <td>{{ $data->user->email }}</td>
+                        <td class="fw-bolder"> <a href="{{ route('dashboard.magang.ubah', $data->id) }}">{{ $data->nama_magang }}</a></td>
+                        <td>{{ $data->tanggal }}</td>
                         <td class="text-center">{{ $data->semester }}</td>
+                        <td>{{ $data->dosen->nama_depan.' '.$data->dosen->nama_belakang}}</td>
                         <td class="text-center">
                           <div class="dropdown">
                             <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
                               <i class="bx bx-dots-vertical-rounded"></i>
                             </button>
                             <div class="dropdown-menu">
-                              <a class="dropdown-item" href="{{ route('dashboard.mahasiswa.detail', $data->id) }}"
+                              <a class="dropdown-item" href="{{ route('dashboard.magang.detail', $data->id) }}"
                                 >
                                 <i class="bx bx-box me-1"></i> Detail</a
                               >
-                              <a class="dropdown-item" href="{{ route('dashboard.mahasiswa.ubah', $data->id )}}"><i class="bx bx-edit-alt me-1"></i> Ubah</a
+                              <a class="dropdown-item" href="{{ route('dashboard.magang.ubah', $data->id )}}"><i class="bx bx-edit-alt me-1"></i> Ubah</a
                               >
 
-                            <form action="{{ route('dashboard.mahasiswa.hapus', $data->id) }}" 
+                            <form action="{{ route('dashboard.magang.hapus', $data->id) }}" 
                                     method="POST" 
                                     onsubmit="return confirm('Yakin ingin menghapus data ini?');">
                                   @csrf
@@ -75,10 +75,11 @@
                     
                     </tbody>
                   </table>
-                    <div class=" mt-3">
+                  <div class=" mt-3">
                     {{ $datas->links() }}
                   </div>
                 </div>
+                 
               </div>
               <!-- Bootstrap Table with Header - Light -->
 

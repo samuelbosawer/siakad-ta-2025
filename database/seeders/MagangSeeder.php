@@ -21,5 +21,121 @@ class MagangSeeder extends Seeder
             'ket'         => 'Mengikuti magang dosen selama 1 bulan.',
             'dosen_id'    => 1,
         ]);
+
+          DB::table('magangs')->insert([
+            'nama_magang' => 'Pelatihan Pengembangan Kompetensi Dosen',
+            'tanggal'     => '2025-02-10',
+            'semester'    => 'Ganjil 2025',
+            'sk'          => 'SK-001/MAGANG/2025',
+            'ket'         => 'Mengikuti magang dosen selama 1 bulan.',
+            'dosen_id'    => 1,
+        ]);
+
+
+          DB::table('magangs')->insert([
+            'nama_magang' => 'Pelatihan Pengembangan Kompetensi Dosen',
+            'tanggal'     => '2025-02-10',
+            'semester'    => 'Ganjil 2025',
+            'sk'          => 'SK-001/MAGANG/2025',
+            'ket'         => 'Mengikuti magang dosen selama 1 bulan.',
+            'dosen_id'    => 1,
+        ]);
+
+
+
+          DB::table('magangs')->insert([
+            'nama_magang' => 'Pelatihan Pengembangan Kompetensi Dosen',
+            'tanggal'     => '2025-02-10',
+            'semester'    => 'Ganjil 2025',
+            'sk'          => 'SK-001/MAGANG/2025',
+            'ket'         => 'Mengikuti magang dosen selama 1 bulan.',
+            'dosen_id'    => 1,
+        ]);
+
+
+          DB::table('magangs')->insert([
+            'nama_magang' => 'Pelatihan Pengembangan Kompetensi Dosen',
+            'tanggal'     => '2025-02-10',
+            'semester'    => 'Ganjil 2025',
+            'sk'          => 'SK-001/MAGANG/2025',
+            'ket'         => 'Mengikuti magang dosen selama 1 bulan.',
+            'dosen_id'    => 1,
+        ]);
+
+
+          DB::table('magangs')->insert([
+            'nama_magang' => 'Pelatihan Pengembangan Kompetensi Dosen',
+            'tanggal'     => '2025-02-10',
+            'semester'    => 'Ganjil 2025',
+            'sk'          => 'SK-001/MAGANG/2025',
+            'ket'         => 'Mengikuti magang dosen selama 1 bulan.',
+            'dosen_id'    => 1,
+        ]);
+
+
+          DB::table('magangs')->insert([
+            'nama_magang' => 'Pelatihan Pengembangan Kompetensi Dosen',
+            'tanggal'     => '2025-02-10',
+            'semester'    => 'Ganjil 2025',
+            'sk'          => 'SK-001/MAGANG/2025',
+            'ket'         => 'Mengikuti magang dosen selama 1 bulan.',
+            'dosen_id'    => 1,
+        ]);
+
+          DB::table('magangs')->insert([
+            'nama_magang' => 'Pelatihan Pengembangan Kompetensi Dosen',
+            'tanggal'     => '2025-02-10',
+            'semester'    => 'Ganjil 2025',
+            'sk'          => 'SK-001/MAGANG/2025',
+            'ket'         => 'Mengikuti magang dosen selama 1 bulan.',
+            'dosen_id'    => 1,
+        ]);
+
+          DB::table('magangs')->insert([
+            'nama_magang' => 'Pelatihan Pengembangan Kompetensi Dosen',
+            'tanggal'     => '2025-02-10',
+            'semester'    => 'Ganjil 2025',
+            'sk'          => 'SK-001/MAGANG/2025',
+            'ket'         => 'Mengikuti magang dosen selama 1 bulan.',
+            'dosen_id'    => 1,
+        ]);
+
+          DB::table('magangs')->insert([
+            'nama_magang' => 'Pelatihan Pengembangan Kompetensi Dosen',
+            'tanggal'     => '2025-02-10',
+            'semester'    => 'Ganjil 2025',
+            'sk'          => 'SK-001/MAGANG/2025',
+            'ket'         => 'Mengikuti magang dosen selama 1 bulan.',
+            'dosen_id'    => 1,
+        ]);
+
+
+          DB::table('magangs')->insert([
+            'nama_magang' => 'Pelatihan Pengembangan Kompetensi Dosen',
+            'tanggal'     => '2025-02-10',
+            'semester'    => 'Ganjil 2025',
+            'sk'          => 'SK-001/MAGANG/2025',
+            'ket'         => 'Mengikuti magang dosen selama 1 bulan.',
+            'dosen_id'    => 1,
+        ]);
+
+
+          DB::table('magangs')->insert([
+            'nama_magang' => 'Pelatihan Pengembangan Kompetensi Dosen',
+            'tanggal'     => '2025-02-10',
+            'semester'    => 'Ganjil 2025',
+            'sk'          => 'SK-001/MAGANG/2025',
+            'ket'         => 'Mengikuti magang dosen selama 1 bulan.',
+            'dosen_id'    => 1,
+        ]);
+
+          DB::table('magangs')->insert([
+            'nama_magang' => 'Pelatihan Pengembangan Kompetensi Dosen',
+            'tanggal'     => '2025-02-10',
+            'semester'    => 'Ganjil 2025',
+            'sk'          => 'SK-001/MAGANG/2025',
+            'ket'         => 'Mengikuti magang dosen selama 1 bulan.',
+            'dosen_id'    => 1,
+        ]);
     }
 }

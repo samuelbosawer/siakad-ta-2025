@@ -31,7 +31,7 @@ class DosenController extends Controller
                     });
                 });
             })
-            ->orderBy('nama_depan')
+            ->orderBy('id','desc')
             ->paginate(7);
         return view('admin.dosen.index', compact('datas'))
             ->with('i', (request()->input('page', 1) - 1) * 7);

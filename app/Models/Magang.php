@@ -16,6 +16,7 @@ class Magang extends Model
         'ket',
         'jenis_kelamin',
         'status',
+        'dosen_id',
     ];
 
     // Relasi ke Dosen
