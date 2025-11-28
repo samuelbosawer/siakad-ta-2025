@@ -109,6 +109,16 @@ class KknController extends Controller
     // Hapus data
     public function destroy($id)
     {
-        //
+        $data = Kkn::findOrFail($id);
+
+        // Hapus file SK jika ada
+        if (!empty($data->sk) && Storage::disk('public')->exists($data->sk)) {
+            Storage::disk('public')->delete($data->sk);
+        }
+
+        $data->delete();
+
+        Alert::success('Berhasil', 'Data berhasil dihapus');
+        return redirect()->route('dashboard.kkn');
     }
 }
