@@ -101,7 +101,7 @@ class MagangController extends Controller
             'semester'    => 'required|string|max:50',
             'sk'          => 'nullable|file|mimes:pdf,doc,docx,jpg,png',
             'dosen_id'    => 'required|integer',
-            'status'         => 'required|string',
+            'status'      => 'required|string',
             'ket'         => 'nullable|string',
         ]);
 
@@ -129,6 +129,16 @@ class MagangController extends Controller
     // Hapus data
     public function destroy($id)
     {
-        //
+        $data = Magang::findOrFail($id);
+
+        // Hapus file SK jika ada
+        if (!empty($data->sk) && Storage::disk('public')->exists($data->sk)) {
+            Storage::disk('public')->delete($data->sk);
+        }
+
+        $data->delete();
+
+        Alert::success('Berhasil', 'Data berhasil dihapus');
+        return redirect()->route('dashboard.magang');
     }
 }

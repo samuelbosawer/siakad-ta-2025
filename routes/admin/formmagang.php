@@ -12,6 +12,6 @@ Route::group(['middleware' => ['auth']], function () {
         Route::delete('form-magang/{id}', [FormMagang::class, 'destroy'])->name('form-magang.hapus');
         Route::post('form-magang/store', [FormMagang::class, 'store'])->name('form-magang.store');
         Route::get('form-magang/{id}/ubah', [FormMagang::class, 'edit'])->name('form-magang.ubah');
-        Route::put('form-magang/{id}', [FormMagang::class, 'update'])->name('form-kkn.update');
+        Route::put('form-magang/{id}', [FormMagang::class, 'update'])->name('form-magang.update');
     });
 });
