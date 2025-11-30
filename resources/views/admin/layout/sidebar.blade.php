@@ -1,8 +1,8 @@
  <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
           <div class="app-brand demo">
-            <a href="index.html" class="app-brand-link">
+            <a href="{{ route('dashboard.home') }}" class="app-brand-link">
               <span class="app-brand-logo demo">
-                {{-- Logo --}}
+               <img width="50px" src="{{ asset('assets/img/logo.png') }}" alt="" srcset="">
               </span>
               <span class=" menu-text fw-bolder ms-2">SIAK UM PAPUA</span>
             </a>

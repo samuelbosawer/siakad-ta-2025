@@ -64,6 +64,7 @@
             <div class="card-body">
               <!-- Logo -->
                 <div class="text-center">
+                   <img width="100px" class="p-3" src="{{ asset('assets/img/logo.png') }}" alt="" srcset="">
                        <h3 class="fw-bold">SIAK <br> Prodi Ilmu Komunikasi <br>  UM Papua</h3>
                 </div>
               <!-- /Logo -->

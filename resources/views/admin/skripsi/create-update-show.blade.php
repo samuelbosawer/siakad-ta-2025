@@ -29,10 +29,10 @@
 
 
                                 <div class="col-md-6 mb-3">
-                                    <label class="form-label">Propsal</label>
+                                    <label class="form-label">Proposal</label>
                                     <select name="id_proposal" class="form-select"
                                         @if (Request::segment(3) == 'detail') disabled @endif>
-                                        <option value="">Pilih Propsal</option>
+                                        <option value="">Pilih Proposal</option>
                                         @foreach ($propsal as $p)
                                             <option value="{{ $p->id }}" @selected(old('id_proposal', $data->id_proposal ?? '') == $p->id)>
                                                 {{ $p->judul }}

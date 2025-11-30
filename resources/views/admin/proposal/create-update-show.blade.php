@@ -13,8 +13,8 @@
                         <div class="card-body">
 
                             @if (Request::segment(4) == 'ubah' && Request::segment(2) == 'proposal')
-                                <form action="{{ route('dashboard.proposal.update', $data->id) }}" enctype="multipart/form-data"
-                                    method="POST">
+                                <form action="{{ route('dashboard.proposal.update', $data->id) }}"
+                                    enctype="multipart/form-data" method="POST">
                                     @csrf
                                     @method('PUT')
                                 @elseif (Request::segment(3) == 'tambah' && Request::segment(2) == 'proposal')
@@ -37,38 +37,42 @@
                                     @enderror
                                 </div>
 
-                                
-                            <div class="col-md-6 mb-3">
-                            <label class="form-label">Mahasiswa</label>
-                            <select name="mahasiswa_id" class="form-select"  @if (Request::segment(3) == 'detail') disabled @endif>
-                                <option value="">Pilih Mahasiswa</option>
-                                @foreach ($mahasiswas as $m)
-                                    <option value="{{ $m->id }}"
-                                        @selected( old('mahasiswa_id', $data->mahasiswa_id ?? '') == $m->id )>
-                                        {{ $m->nama_depan . ' ' . $m->nama_belakang }}
-                                    </option>
-                                @endforeach
-                            </select>
-                            @error('mahasiswa_id') <small class="text-danger">{{ $message }}</small> @enderror
-                        </div>
-                        
-                               
 
-                                  <div class="col-md-6 mb-3">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Mahasiswa</label>
+                                    <select name="mahasiswa_id" class="form-select"
+                                        @if (Request::segment(3) == 'detail') disabled @endif>
+                                        <option value="">Pilih Mahasiswa</option>
+                                        @foreach ($mahasiswas as $m)
+                                            <option value="{{ $m->id }}" @selected(old('mahasiswa_id', $data->mahasiswa_id ?? '') == $m->id)>
+                                                {{ $m->nama_depan . ' ' . $m->nama_belakang }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    @error('mahasiswa_id')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+
+
+
+                                <div class="col-md-6 mb-3">
                                     <label for="status" class="form-label">Status</label>
                                     <select name="status" class="form-select" id="exampleFormControlSelect1"
                                         @if (Request::segment(3) == 'detail') disabled @endif>
                                         <option value="">Pilih</option>
-                                        <option value="Belum Selesai" @if( isset($data) && ($data->status == 'Belum Selesai') ) selected @endif>Belum Selesai</option>
+                                        <option value="Belum Selesai" @if (isset($data) && $data->status == 'Belum Selesai') selected @endif>
+                                            Belum Selesai</option>
 
-                                        <option value="Selesai" @if( isset($data) && ($data->status == 'Selesai') ) selected @endif>Selesai</option>
+                                        <option value="Selesai" @if (isset($data) && $data->status == 'Selesai') selected @endif>Selesai
+                                        </option>
                                     </select>
-                                      @error('status')
-                                            <small class="text-danger">{{ $message }}</small>
-                                        @enderror
+                                    @error('status')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
                                 </div>
 
-                                 <div class="col-md-6 mb-3">
+                                <div class="col-md-6 mb-3">
                                     <label for="tanggal" class="form-label">Tanggal</label>
                                     <input type="date" class="form-control" id="tanggal" name="tanggal"
                                         value="{{ old('tanggal') ?? ($data->tanggal ?? '') }}"
@@ -78,29 +82,31 @@
                                     @enderror
                                 </div>
 
-                               
+
 
                             </div>
 
-                             <div class="col-md-6 mb-3">
-                                    <label for="berkas" class="form-label">Berkas</label>
-                                    <p>
-                                        @if(isset($data) && $data->berkas)
-                                        <a href="{{ asset('storage/' . $data->berkas) }}" target="_blank" class="btn btn-dark btn-sm">Lihat File</a>
-                                        @endif
-                                    </p>
-                                    <input type="file" class="form-control" id="berkas" name="berkas"
-                                        value="{{ old('berkas') ?? ($data->berkas ?? '') }}"
-                                        @if (Request::segment(3) == 'detail') disabled @endif>
-                                    @error('berkas')
-                                        <small class="text-danger">{{ $message }}</small>
-                                    @enderror
-                                </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="berkas" class="form-label">Berkas</label>
+                                <p>
+                                    @if (isset($data) && $data->berkas)
+                                        <a href="{{ asset('storage/' . $data->berkas) }}" target="_blank"
+                                            class="btn btn-dark btn-sm">Lihat File</a>
+                                    @endif
+                                </p>
+                                <input type="file" class="form-control" id="berkas" name="berkas"
+                                    value="{{ old('berkas') ?? ($data->berkas ?? '') }}"
+                                    @if (Request::segment(3) == 'detail') disabled @endif>
+                                @error('berkas')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
 
 
                             <div class="col-md-12 mb-3 mx-auto">
                                 @if (Request::segment(3) == 'detail')
-                                    <a href="{{ route('dashboard.proposal.ubah', $data->id) }}" class="btn btn-dark text-white">
+                                    <a href="{{ route('dashboard.proposal.ubah', $data->id) }}"
+                                        class="btn btn-dark text-white">
                                         <i class="menu-icon tf-icons bx bx-pencil"></i> UBAH DATA </a>
                                 @elseif ((Request::segment(3) == 'tambah' || Request::segment(4) == 'ubah') && Request::segment(2) == 'proposal')
                                     <button type="submit" class="btn btn-primary text-white">SIMPAN <i
