@@ -13,14 +13,14 @@ return new class extends Migration
     {
         Schema::create('proposals', function (Blueprint $table) {
             $table->id();
-           $table->string('judul');
+            $table->string('judul');
             $table->string('berkas')->nullable();
             $table->string('status')->nullable();
-            $table->date('tgl')->nullable();
-            $table->unsignedBigInteger('id_mahasiswa');
+            $table->date('tanggal')->nullable();
+            $table->unsignedBigInteger('mahasiswa_id');
 
             // Relasi ke tabel mahasiswa
-            $table->foreign('id_mahasiswa')
+            $table->foreign('mahasiswa_id')
                   ->references('id')
                   ->on('mahasiswas')
                   ->onDelete('cascade');
