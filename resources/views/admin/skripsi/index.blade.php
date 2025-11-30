@@ -11,11 +11,11 @@
     <div class="col-12">
         
         <div class="card">
-                <h5 class="card-header">Data Proposal </h5>
+                <h5 class="card-header">Data Skripsi </h5>
                 <div class="table-responsive text-nowrap p-3">
                   <div class="row">
                     <div class="col-6 my-3">
-                      <a class="btn btn-primary" href="{{ route('dashboard.proposal.tambah') }}">Tambah Data Proposal <i class="bx bx-plus me-1"></i></a>
+                      <a class="btn btn-primary" href="{{ route('dashboard.skripsi.tambah') }}">Tambah Data Skripsi <i class="bx bx-plus me-1"></i></a>
                     </div>
                     <div class="col-6 my-3">
                       @include('admin.layout.search')
@@ -29,9 +29,8 @@
                         <th class="text-white text-center  p-3 fw-bolder" width="10px" hight="10px" >No</th>
                         <th class="text-white text-center  p-3 fw-bolder">Judul</th>
                         <th class="text-white text-center  p-3 fw-bolder">Mahasiswa</th>
-                        <th class="text-white text-center  p-3 fw-bolder">Berkas</th>
+                        <th class="text-white text-center  p-3 fw-bolder">Berkas Skripsi</th>
                         <th class="text-white text-center  p-3 fw-bolder">Status</th> 
-                        <th class="text-white text-center  p-3 fw-bolder">Tanggal</th> 
                         <th class="text-white text-center  p-3 fw-bolder"></th> 
                       </tr>
                     </thead>
@@ -39,15 +38,14 @@
                       @foreach ($datas as $data )
                       <tr>
                         <td>{{ ++$i }}</td>
-                        <td class="fw-bolder"> <a href="{{ route('dashboard.proposal.ubah', $data->id) }}">{{ $data->judul }}</a></td>
-                        <td>{{ $data->mahasiswa->nama_depan.' '.$data->mahasiswa->nama_belakang }}</td>
+                        <td class="fw-bolder"> <a href="{{ route('dashboard.skripsi.ubah', $data->id) }}">{{ $data->proposal->judul.' ('.$data->proposal->tanggal.')' }}</a></td>
+                        <td>{{ $data->proposal->mahasiswa->nama_depan.' '.$data->proposal->mahasiswa->nama_belakang }}</td>
                         <td>
                            @if(isset($data) && $data->berkas)
                                         <a href="{{ asset('storage/' . $data->berkas) }}" target="_blank" class="btn btn-dark btn-sm">Lihat File</a>
                                         @endif
                         </td>
                         <td>{{ $data->status }}</td>
-                        <td>{{ $data->tanggal }}</td>
                       
                         <td class="text-center">
                           <div class="dropdown">
@@ -55,14 +53,14 @@
                               <i class="bx bx-dots-vertical-rounded"></i>
                             </button>
                             <div class="dropdown-menu">
-                              <a class="dropdown-item" href="{{ route('dashboard.proposal.detail', $data->id) }}"
+                              <a class="dropdown-item" href="{{ route('dashboard.skripsi.detail', $data->id) }}"
                                 >
                                 <i class="bx bx-box me-1"></i> Detail</a
                               >
-                              <a class="dropdown-item" href="{{ route('dashboard.proposal.ubah', $data->id )}}"><i class="bx bx-edit-alt me-1"></i> Ubah</a
+                              <a class="dropdown-item" href="{{ route('dashboard.skripsi.ubah', $data->id )}}"><i class="bx bx-edit-alt me-1"></i> Ubah</a
                               >
 
-                            <form action="{{ route('dashboard.proposal.hapus', $data->id) }}" 
+                            <form action="{{ route('dashboard.skripsi.hapus', $data->id) }}" 
                                     method="POST" 
                                     onsubmit="return confirm('Yakin ingin menghapus data ini?');">
                                   @csrf
