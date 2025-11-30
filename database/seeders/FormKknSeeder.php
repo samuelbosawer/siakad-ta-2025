@@ -16,7 +16,7 @@ class FormKknSeeder extends Seeder
         DB::table('form_kkns')->insert([
             [
                 'mahasiswa_id' => 1,
-                'tgl' => '2025-01-10',
+                'tanggal' => '2025-01-10',
                 'kem_studi' => 'Teknik Informatika',
                 'bukti_bayar' => 'bukti_bayar_1.jpg',
                 'keterangan' => 'Sudah membayar biaya KKN',
@@ -24,7 +24,7 @@ class FormKknSeeder extends Seeder
             ],
             [
                 'mahasiswa_id' => 2,
-                'tgl' => '2025-01-12',
+                'tanggal' => '2025-01-12',
                 'kem_studi' => 'Sistem Informasi',
                 'bukti_bayar' => 'bukti_bayar_2.jpg',
                 'keterangan' => 'Menunggu validasi',

@@ -8,7 +8,7 @@
             <div class="col-12">
                 <div class="row">
                     <div class="card mb-4">
-                        <h5 class="card-header fw-bolder"><i class="menu-icon tf-icons bx bx-user"></i>
+                        <h5 class="card-header fw-bolder"><i class="menu-icon tf-icons bx bx-cube-alt"></i>
                             {{ $judul ?? 'TAMBAH DATA KKN' }} </h5>
                         <div class="card-body">
 
@@ -42,7 +42,7 @@
                                     <select name="tahun" id="tahun" class="form-select"
                                         @if (Request::segment(3) == 'detail') disabled @endif>
                                         <option selected hidden>Pilih Tahun</option>
-                                        @for ($year = date('Y'); $year >= 2000; $year--)
+                                        @for ($year = date('Y'); $year >= 2016; $year--)
                                             <option value="{{ $year }}"
                                                 {{ old('tahun', $data->tahun ?? '') == $year ? 'selected' : '' }}>
                                                 {{ $year }}

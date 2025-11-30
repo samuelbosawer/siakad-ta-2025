@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('form_kkns', function (Blueprint $table) {
-            $table->id();
-            $table->date('tgl')->nullable();
+        $table->id();
+            $table->date('tanggal')->nullable();
             $table->string('kem_studi')->nullable();
             $table->string('bukti_bayar')->nullable();
             $table->text('keterangan')->nullable();
