@@ -25,12 +25,18 @@
             {{-- <li class="menu-header small text-uppercase">
               <span class="menu-header-text">Data Master</span>
             </li> --}}
+
+           @if (Auth::user()->hasRole('adminprodi'))
              <li class="menu-item @if (Request::segment(1) == 'dashboard' && Request::segment(2) == 'prodi') active @endif" >
               <a href="{{ route('dashboard.prodi') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-box"></i>
                 <div data-i18n="Analytics">Data Prodi</div>
               </a>
             </li>
+          @endif
+
+
+          
 
             <li class="menu-item  @if (Request::segment(1) == 'dashboard' && Request::segment(2) == 'mahasiswa') active @endif ">
               <a href="{{ route('dashboard.mahasiswa') }}" class="menu-link">
@@ -39,12 +45,15 @@
               </a>
             </li>
 
+
+             @if (Auth::user()->hasRole('adminprodi') || Auth::user()->hasRole('dosen') )
             <li class="menu-item @if (Request::segment(1) == 'dashboard' && Request::segment(2) == 'dosen') active @endif">
               <a href="{{ route('dashboard.dosen') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-user"></i>
                 <div data-i18n="Analytics">Data Dosen</div>
               </a>
             </li>
+            @endif
 
           
 
