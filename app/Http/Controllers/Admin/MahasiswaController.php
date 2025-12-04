@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Mahasiswa;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class MahasiswaController extends Controller
@@ -13,6 +14,19 @@ class MahasiswaController extends Controller
       // Tampilkan semua data
     public function index(Request $request)
     {
+
+         if(Auth::user()->role('mahasiswa'))
+         {
+               $user = Auth::user();
+              $data = Mahasiswa::where('id',$user->mahasiswa->id)->first();
+              $judul = 'DETAIL DATA MAHASISWA';
+             return view('admin.mahasiswa.create-update-show', compact('data','judul'));
+         }
+
+        
+
+
+
         $datas = Mahasiswa::with('user')
         ->whereNotNull('nama_depan')
         ->when($request->s, function ($query) use ($request) {
@@ -98,7 +112,7 @@ class MahasiswaController extends Controller
     public function edit($id)
     {
          $data = Mahasiswa::where('id',$id)->first();
-        $judul = 'UBAH DATA MAHASISWA';
+          $judul = 'UBAH DATA MAHASISWA';
           return view('admin.mahasiswa.create-update-show', compact('data','judul'));
     }
 

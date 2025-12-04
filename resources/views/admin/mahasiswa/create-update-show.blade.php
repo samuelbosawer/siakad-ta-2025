@@ -90,7 +90,8 @@
                         <small class="text-danger">{{ $message }}</small>
                        @enderror
                    </div>
-
+@if(!Auth::user()->role('mahasiswa') || !Auth::user()->role('dosen') )
+         
                    
                    <div class="col-12">
                     <p class="text-white p-2 bg-dark rounded-3 ml-3">Akses Akun</p>
@@ -131,6 +132,9 @@
                     <a href="{{ route('dashboard.mahasiswa') }}" class="btn btn-dark text-white">  KEMBALI </a>
 
                    </div>
+
+
+            @endif
                    
                    
                </form>
