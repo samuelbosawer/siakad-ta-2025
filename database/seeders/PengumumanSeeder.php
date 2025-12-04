@@ -16,7 +16,7 @@ class PengumumanSeeder extends Seeder
          DB::table('pengumumans')->insert([
             [
                 'judul'     => 'Pengumuman Ujian Tengah Semester',
-                'gambar'    => 'uts_banner.jpg',
+                'gambar'    => null,
                 'tanggal'   => '2025-03-10',
                 'deskripsi' => 'Pelaksanaan UTS akan dimulai pada tanggal 15 Maret 2025. 
                                 Mohon mahasiswa mempersiapkan diri dan mengecek jadwal masing-masing.'
