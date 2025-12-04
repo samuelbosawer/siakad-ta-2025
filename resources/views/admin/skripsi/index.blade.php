@@ -12,8 +12,10 @@
                     <div class="table-responsive text-nowrap p-3">
                         <div class="row">
                             <div class="col-6 my-3">
+                                 @if(!Auth::user()->hasAnyRole(['dosen']))
                                 <a class="btn btn-primary" href="{{ route('dashboard.skripsi.tambah') }}">Tambah Data Skripsi
                                     <i class="bx bx-plus me-1"></i></a>
+                                  @endif
                             </div>
                             <div class="col-6 my-3">
                                 @include('admin.layout.search')
@@ -72,11 +74,12 @@
                                                     href="{{ route('dashboard.skripsi.detail', $data->id) }}">
                                                     <i class="bx bx-box me-1"></i> Detail</a>
 
-                                                @if (!Auth::user()->hasAnyRole(['mahasiswa', 'dosen']))
+                                                @if (!Auth::user()->hasAnyRole(['mahasiswa']))
                                                     <a class="dropdown-item"
                                                         href="{{ route('dashboard.skripsi.ubah', $data->id) }}"><i
                                                             class="bx bx-edit-alt me-1"></i> Ubah</a>
 
+                                                             @if (Auth::user()->hasAnyRole(['adminprodi']))
                                                     <form action="{{ route('dashboard.skripsi.hapus', $data->id) }}"
                                                         method="POST"
                                                         onsubmit="return confirm('Yakin ingin menghapus data ini?');">
@@ -86,6 +89,7 @@
                                                         <button type="submit" class="dropdown-item text-danger">
                                                             <i class="bx bx-trash me-1"></i> Hapus
                                                         </button>
+                                                        @endif
                                                 @endif
                                                 </form>
                                             </div>

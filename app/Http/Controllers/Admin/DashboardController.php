@@ -17,10 +17,17 @@ class DashboardController extends Controller
       public function index()
     {
 
-        if( Auth::user()->hasRole('mahasiswa'))
+        if(Auth::user()->hasAnyRole(['mahasiswa']))
          {
              return redirect()->route('dashboard.mahasiswa');
          }
+
+         
+        if(Auth::user()->hasAnyRole(['dosen']))
+         {
+             return redirect()->route('dashboard.dosen');
+         }
+
         // Count setiap model
         $jumlahDosen      = Dosen::count();
         $jumlahKkn        = Kkn::count();

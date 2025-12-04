@@ -175,7 +175,7 @@
                     <div class="col-lg-4 col-4">
                         <div class="stats-item text-center w-100 h-100">
                             <img src="/assets/img/logo.png" class="img-fluid rounded" width="50" alt="">
-                            <a href="https://umpapua.ac.id" target="_blank" class="text-white fw-bold">
+                            <a href="https://umpapua.siakadcloud.com/gate/login" target="_blank" class="text-white fw-bold">
                                 <h class="text-white">SIAKAD</h>
                             </a>
                         </div>
@@ -185,7 +185,7 @@
                         <div class="stats-item text-center w-100 h-100">
                             <img src="/assets-visitor/img/cms.png" class="img-fluid rounded" width="50"
                                 alt="">
-                            <a href="https://umpapua.ac.id" target="_blank" class="text-white fw-bold">
+                            <a href="https://edlink.id/login" target="_blank" class="text-white fw-bold">
                                 <h class="text-white">LMS</h>
                             </a>
                         </div>

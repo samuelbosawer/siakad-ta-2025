@@ -76,7 +76,7 @@
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label">Status</label>
                                         <select name="status" class="form-select"
-                                            @if ($isDetail) disabled @endif>
+                                             @if (Request::segment(3) == 'detail') disabled @endif>
                                             <option value="">Pilih</option>
                                             <option value="Dalam Proses" @selected(isset($data) && $data->status == 'Dalam Proses')>Dalam Proses</option>
                                             <option value="Selesai" @selected(isset($data) && $data->status == 'Selesai')>Selesai</option>

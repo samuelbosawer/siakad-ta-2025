@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Dosen;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class DosenController extends Controller
@@ -13,6 +14,18 @@ class DosenController extends Controller
     // Tampilkan semua data
     public function index(Request $request)
     {
+
+
+
+         if(Auth::user()->hasRole('dosen'))
+         {
+             $user = Auth::user();
+          
+                $data = Dosen::where('user_id',$user->id)->first();
+              $judul = 'DETAIL DATA DOSEN';
+             return view('admin.dosen.create-update-show', compact('data','judul'));
+         }
+         
          $datas = Dosen::with('user')
         ->whereNotNull('nama_depan')
         ->when($request->s, function ($query) use ($request) {

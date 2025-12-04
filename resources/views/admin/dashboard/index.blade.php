@@ -14,7 +14,7 @@
                     <div class="row">
 
 
-                         @if (Auth::user()->hasRole('adminprodi'))
+                        @if(!Auth::user()->hasAnyRole(['mahasiswa', 'dosen']))
 
                         <div class="col-lg-3 col-md-6 col-6 mt-3 shadow-2">
                             <div class="card text-center">

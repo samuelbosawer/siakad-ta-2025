@@ -24,8 +24,8 @@
                     </li>
 
                     <li><a href="{{ route('pengumuman') }}">PENGUMUMAN</a></li>
-                    <li><a href="https://umpapua.ac.id" target="_blank">SIAKAD KAMPUS</a></li>
-                    <li><a href="https://umpapua.ac.id" target="_blank">LMS</a></li>
+                    <li><a href="https://umpapua.siakadcloud.com/gate/login" target="_blank">SIAKAD KAMPUS</a></li>
+                    <li><a href="https://edlink.id/login" target="_blank">LMS</a></li>
                     <li><a href="https://pddikti.kemdiktisaintek.go.id" target="_blank">PDDIKTI</a></li>
                     <li>
 
