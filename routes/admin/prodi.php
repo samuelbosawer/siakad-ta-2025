@@ -3,7 +3,7 @@
 use App\Http\Controllers\Admin\ProdiController as Prodi;
 use Illuminate\Support\Facades\Route;
 
-Route::group(['middleware' => ['auth']], function () {
+Route::group(['middleware' => ['role.custom:adminprodi']], function () {
 
     Route::controller(Prodi::class)->group(function(){
         Route::get('prodi', [Prodi::class, 'index'])->name('prodi');

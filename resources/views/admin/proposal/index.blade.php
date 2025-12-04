@@ -49,7 +49,7 @@
                                         @endif
                         </td>
                         <td>{{ $data->status }}</td>
-                        <td>{{ $data->tanggal }}</td>
+                        <td>{{ \Carbon\Carbon::parse($data->tanggal)->translatedFormat('d m Y') }}</td>
                       
                         <td class="text-center">
                           <div class="dropdown">

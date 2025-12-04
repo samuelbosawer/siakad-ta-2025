@@ -3,7 +3,7 @@
 use App\Http\Controllers\Admin\PengumumanController;
 use Illuminate\Support\Facades\Route;
 
-Route::group(['middleware' => ['auth']], function () {
+Route::group(['middleware' => ['role.custom:adminprodi']], function () {
 
     Route::controller(PengumumanController::class)->group(function(){
         Route::get('pengumuman', [PengumumanController::class, 'index'])->name('pengumuman');

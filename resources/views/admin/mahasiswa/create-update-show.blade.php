@@ -111,7 +111,7 @@
                                         <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
-                                @if (!Auth::user()->HasRole('mahasiswa') || !Auth::user()->HasRole('dosen'))
+                                 @if (Auth::user()->HasRole('adminprodi'))  
                                     <div class="col-12">
                                         <p class="text-white p-2 bg-dark rounded-3 ml-3">Akses Akun</p>
                                     </div>
