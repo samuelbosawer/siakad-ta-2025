@@ -27,19 +27,25 @@
                     <li><a href="https://umpapua.ac.id" target="_blank">SIAKAD KAMPUS</a></li>
                     <li><a href="https://umpapua.ac.id" target="_blank">LMS</a></li>
                     <li><a href="https://pddikti.kemdiktisaintek.go.id" target="_blank">PDDIKTI</a></li>
-                </ul>
-                <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
-            </nav>
+                    <li>
 
-           @guest
-                <a class="btn-getstarted" href="{{ route('login') }}">Login</a>
+                        @guest
+                <a class="" href="{{ route('login') }}">LOGIN</a>
             @endguest
 
             @auth
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
-                    <button class="btn-getstarted" type="submit">Logout</button>
+                    <button class="" type="submit">LOGOUNT</button>
                 </form>
             @endauth
+
+
+                    </li>
+                </ul>
+                <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+            </nav>
+
+           
         </div>
     </header>

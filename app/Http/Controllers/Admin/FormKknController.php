@@ -7,6 +7,7 @@ use App\Models\FormKkn;
 use App\Models\Kkn;
 use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Storage;
 
@@ -15,7 +16,16 @@ class FormKknController extends Controller
       // Tampilkan semua data
     public function index(Request $request)
     {
-         $datas = FormKkn::with(['kkn', 'mahasiswa'])
+
+
+        $user = Auth::user();
+
+        // Cek apakah role mahasiswa
+        if (Auth::user()->hasRole('mahasiswa')) {
+                    $mahasiswaId = $user->mahasiswa->id;
+
+
+                     $datas = FormKkn::where('mahasiswa_id', $mahasiswaId)->with(['kkn', 'mahasiswa'])
             ->when($request->s, function ($query) use ($request) {
                 $s = $request->s;
 
@@ -40,6 +50,37 @@ class FormKknController extends Controller
             })
             ->orderBy('id', 'desc')
             ->paginate(7);
+
+        }else{
+
+             $datas = FormKkn::with(['kkn', 'mahasiswa'])
+            ->when($request->s, function ($query) use ($request) {
+                $s = $request->s;
+
+                $query->where(function ($q) use ($s) {
+
+                    $q->where('keterangan', 'LIKE', "%$s%");
+                    
+
+                    // cari berdasarkan data KKN
+                    $q->orWhereHas('kkn', function ($m) use ($s) {
+                        $m->where('nama_kkn', 'LIKE', "%$s%")
+                        ->orwhere('status', 'LIKE', "%$s%")
+                            ->orWhere('tahun', 'LIKE', "%$s%");
+                    });
+
+                    // cari berdasarkan data Mahasiswa
+                    $q->orWhereHas('mahasiswa', function ($mh) use ($s) {
+                        $mh->where('nama_depan', 'LIKE', "%$s%")
+                            ->orWhere('nama_belakang', 'LIKE', "%$s%");
+                    });
+                });
+            })
+            ->orderBy('id', 'desc')
+            ->paginate(7);
+            
+        }
+        
         return view('admin.form-kkn.index', compact('datas'))
             ->with('i', (request()->input('page', 1) - 1) * 7);
     }

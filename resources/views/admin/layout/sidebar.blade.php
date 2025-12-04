@@ -16,12 +16,17 @@
 
           <ul class="menu-inner py-1">
             <!-- Dashboard -->
+
+
+               @if (!Auth::user()->hasRole('mahasiswa'))
             <li class="menu-item @if (Request::segment(1) == 'dashboard' && Request::segment(2) == null) active @endif">
               <a href="{{ route('dashboard.home') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
                 <div data-i18n="Analytics">Dashboard</div>
               </a>
             </li>
+
+            @endif
             {{-- <li class="menu-header small text-uppercase">
               <span class="menu-header-text">Data Master</span>
             </li> --}}
@@ -46,7 +51,7 @@
             </li>
 
 
-             @if (Auth::user()->hasRole('adminprodi') || Auth::user()->hasRole('dosen') )
+             @if(!Auth::user()->hasAnyRole(['mahasiswa', 'dosen']))
             <li class="menu-item @if (Request::segment(1) == 'dashboard' && Request::segment(2) == 'dosen') active @endif">
               <a href="{{ route('dashboard.dosen') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-user"></i>

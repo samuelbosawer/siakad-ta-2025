@@ -10,11 +10,17 @@ use App\Models\Mahasiswa;
 use App\Models\Proposal;
 use App\Models\Skripsi;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
       public function index()
     {
+
+        if( Auth::user()->hasRole('mahasiswa'))
+         {
+             return redirect()->route('dashboard.mahasiswa');
+         }
         // Count setiap model
         $jumlahDosen      = Dosen::count();
         $jumlahKkn        = Kkn::count();

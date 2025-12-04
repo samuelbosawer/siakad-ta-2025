@@ -15,18 +15,14 @@ class MahasiswaController extends Controller
     public function index(Request $request)
     {
 
-         if(Auth::user()->role('mahasiswa'))
+         if(Auth::user()->hasRole('mahasiswa'))
          {
                $user = Auth::user();
               $data = Mahasiswa::where('id',$user->mahasiswa->id)->first();
               $judul = 'DETAIL DATA MAHASISWA';
              return view('admin.mahasiswa.create-update-show', compact('data','judul'));
          }
-
         
-
-
-
         $datas = Mahasiswa::with('user')
         ->whereNotNull('nama_depan')
         ->when($request->s, function ($query) use ($request) {

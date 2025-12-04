@@ -7,6 +7,7 @@ use App\Models\FormMagang;
 use App\Models\Magang;
 use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -15,31 +16,64 @@ class FormMagangController extends Controller
     // Tampilkan semua data
     public function index(Request $request)
     {
-        $datas = FormMagang::with(['magang', 'mahasiswa'])
-            ->when($request->s, function ($query) use ($request) {
-                $s = $request->s;
+        // Ambil user login
+        $user = Auth::user();
 
-                $query->where(function ($q) use ($s) {
+        // Cek apakah role mahasiswa
+        if (Auth::user()->hasRole('mahasiswa')) {
 
-                    $q->where('tanggal', 'LIKE', "%$s%")
-                        ->orWhere('ket', 'LIKE', "%$s%")
-                        ->orWhere('status', 'LIKE', "%$s%");
+            // Ambil ID mahasiswa dari relasi user → mahasiswa
+            $mahasiswaId = $user->mahasiswa->id;
+            // Hanya tampilkan FormMagang milik mahasiswa sedang login
+            $datas = FormMagang::with(['magang', 'mahasiswa'])
+                ->where('mahasiswa_id', $mahasiswaId)
+                ->when($request->s, function ($query) use ($request) {
+                    $s = $request->s;
 
-                    // cari berdasarkan data Magang
-                    $q->orWhereHas('magang', function ($m) use ($s) {
-                        $m->where('nama_magang', 'LIKE', "%$s%")
-                            ->orWhere('semester', 'LIKE', "%$s%");
+                    $query->where(function ($q) use ($s) {
+                        $q->where('tanggal', 'LIKE', "%$s%")
+                            ->orWhere('ket', 'LIKE', "%$s%")
+                            ->orWhere('status', 'LIKE', "%$s%");
+
+                        $q->orWhereHas('magang', function ($m) use ($s) {
+                            $m->where('nama_magang', 'LIKE', "%$s%")
+                                ->orWhere('semester', 'LIKE', "%$s%");
+                        });
+
+                        $q->orWhereHas('mahasiswa', function ($mh) use ($s) {
+                            $mh->where('nama_depan', 'LIKE', "%$s%")
+                                ->orWhere('nama_belakang', 'LIKE', "%$s%");
+                        });
                     });
+                })
+                ->orderBy('id', 'desc')
+                ->paginate(7);
+        } else {
 
-                    // cari berdasarkan data Mahasiswa
-                    $q->orWhereHas('mahasiswa', function ($mh) use ($s) {
-                        $mh->where('nama_depan', 'LIKE', "%$s%")
-                            ->orWhere('nama_belakang', 'LIKE', "%$s%");
+            // Jika admin / operator / role selain mahasiswa → tampilkan semua
+            $datas = FormMagang::with(['magang', 'mahasiswa'])
+                ->when($request->s, function ($query) use ($request) {
+                    $s = $request->s;
+
+                    $query->where(function ($q) use ($s) {
+                        $q->where('tanggal', 'LIKE', "%$s%")
+                            ->orWhere('ket', 'LIKE', "%$s%")
+                            ->orWhere('status', 'LIKE', "%$s%");
+
+                        $q->orWhereHas('magang', function ($m) use ($s) {
+                            $m->where('nama_magang', 'LIKE', "%$s%")
+                                ->orWhere('semester', 'LIKE', "%$s%");
+                        });
+
+                        $q->orWhereHas('mahasiswa', function ($mh) use ($s) {
+                            $mh->where('nama_depan', 'LIKE', "%$s%")
+                                ->orWhere('nama_belakang', 'LIKE', "%$s%");
+                        });
                     });
-                });
-            })
-            ->orderBy('id', 'desc')
-            ->paginate(7);
+                })
+                ->orderBy('id', 'desc')
+                ->paginate(7);
+        }
         return view('admin.form-magang.index', compact('datas'))
             ->with('i', (request()->input('page', 1) - 1) * 7);
     }
@@ -49,6 +83,12 @@ class FormMagangController extends Controller
     {
         $magangs = Magang::orderBy('id', 'desc')->get();
         $mahasiswas = Mahasiswa::orderBy('id', 'desc')->get();
+        if (Auth::user()->role('mahasiswa')) {
+            $user = Auth::user();
+            // Ambil ID mahasiswa dari relasi user → mahasiswa
+            $mahasiswaId = $user->mahasiswa->id;
+            $mahasiswas = Mahasiswa::where('id', $mahasiswaId)->get();
+        }
         return view('admin.form-magang.create-update-show', compact('magangs', 'mahasiswas'));
     }
 
@@ -152,7 +192,6 @@ class FormMagangController extends Controller
 
         $data->delete();
         Alert::success('Berhasil', 'Data magang berhasil ditambahkan');
-                return redirect()->route('dashboard.form-magang');
-
+        return redirect()->route('dashboard.form-magang');
     }
 }

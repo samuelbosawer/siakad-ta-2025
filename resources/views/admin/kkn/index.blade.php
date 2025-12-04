@@ -15,7 +15,9 @@
                 <div class="table-responsive text-nowrap p-3">
                   <div class="row">
                     <div class="col-6 my-3">
+                     @if(!Auth::user()->hasAnyRole(['mahasiswa', 'dosen']))
                       <a class="btn btn-primary" href="{{ route('dashboard.kkn.tambah') }}">Tambah Data KKN <i class="bx bx-plus me-1"></i></a>
+                      @endif
                     </div>
                     <div class="col-6 my-3">
                       @include('admin.layout.search')
@@ -56,6 +58,8 @@
                                 >
                                 <i class="bx bx-box me-1"></i> Detail</a
                               >
+
+                                @if(!Auth::user()->hasAnyRole(['mahasiswa', 'dosen']))
                               <a class="dropdown-item" href="{{ route('dashboard.kkn.ubah', $data->id )}}"><i class="bx bx-edit-alt me-1"></i> Ubah</a
                               >
 
@@ -69,6 +73,7 @@
                                       <i class="bx bx-trash me-1"></i> Hapus
                                   </button>
                               </form>
+                              @endif
                             </div>
                           </div>
                           

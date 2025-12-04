@@ -114,8 +114,12 @@
                         </div>
                         <div class="col-md-12 mb-3 mx-auto">
                             @if (Request::segment(3) == 'detail')
+
+
+                             @if(!Auth::user()->hasRole('mahasiswa') || !Auth::user()->hasRole('dosen') )
                                 <a href="{{ route('dashboard.magang.ubah', $data->id) }}" class="btn btn-dark text-white">
                                     <i class="menu-icon tf-icons bx bx-pencil"></i> UBAH DATA </a>
+                            @endif
                             @elseif ((Request::segment(3) == 'tambah' || Request::segment(4) == 'ubah') && Request::segment(2) == 'magang')
                                 <button type="submit" class="btn btn-primary text-white">SIMPAN <i
                                         class="menu-icon tf-icons bx bx-save"></i></button>

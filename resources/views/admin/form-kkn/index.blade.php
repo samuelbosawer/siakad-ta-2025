@@ -34,12 +34,12 @@
                       </tr>
                     </thead>
                     <tbody class="table-border-bottom-0">
-                      @foreach ($datas as $data )
-                      <tr>
+                      @forelse ($datas as $data )
+                           <tr>
                         <td>{{ ++$i }}</td>
                         <td class="fw-bolder"> <a href="{{ route('dashboard.form-kkn.ubah', $data->id) }}">{{ $data->kkn->nama_kkn  ?? 
                           ''}}</a></td>
-                        <td>{{ $data->tanggal }}</td>
+                      <td class="text-center">   {{ \Carbon\Carbon::parse($data->tanggal)->translatedFormat('d m Y') }}</td>
                         <td>{{ $data->mahasiswa->nama_depan .' '.$data->mahasiswa->nama_belakang }}</td>
                         <td class="text-center">
                           <div class="dropdown">
@@ -51,6 +51,8 @@
                                 >
                                 <i class="bx bx-box me-1"></i> Detail</a
                               >
+
+                                @if(!Auth::user()->hasAnyRole(['mahasiswa', 'dosen']))
                               <a class="dropdown-item" href="{{ route('dashboard.form-kkn.ubah', $data->id )}}"><i class="bx bx-edit-alt me-1"></i> Ubah</a
                               >
 
@@ -64,12 +66,20 @@
                                       <i class="bx bx-trash me-1"></i> Hapus
                                   </button>
                               </form>
+                            @endif
                             </div>
                           </div>
                           
                         </td>
                       </tr>
-                      @endforeach
+                        
+                      @empty
+                         <tr>
+                        <td colspan="5" class="text-center">Data Belum Ada</td>
+                      </tr>
+                      @endforelse ($datas as $data )
+                 
+                
                      
                     
                     </tbody>

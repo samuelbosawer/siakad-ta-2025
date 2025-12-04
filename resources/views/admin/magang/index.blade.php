@@ -15,7 +15,11 @@
                 <div class="table-responsive text-nowrap p-3">
                   <div class="row">
                     <div class="col-6 my-3">
-                      <a class="btn btn-primary" href="{{ route('dashboard.magang.tambah') }}">Tambah Data Magang <i class="bx bx-plus me-1"></i></a>
+                    @if(!Auth::user()->hasAnyRole(['mahasiswa', 'dosen']))
+    <a class="btn btn-primary" href="{{ route('dashboard.magang.tambah') }}">
+        Tambah Data Magang <i class="bx bx-plus me-1"></i>
+    </a>
+@endif
                     </div>
                     <div class="col-6 my-3">
                       @include('admin.layout.search')
@@ -39,7 +43,7 @@
                       <tr>
                         <td>{{ ++$i }}</td>
                         <td class="fw-bolder"> <a href="{{ route('dashboard.magang.ubah', $data->id) }}">{{ $data->nama_magang }}</a></td>
-                        <td>{{ $data->tanggal }}</td>
+                        <td>{{ \Carbon\Carbon::parse($data->tanggal)->translatedFormat('d F Y') }}</td>
                         <td class="text-center">{{ $data->semester }}</td>
                         <td>{{ $data->dosen->nama_depan.' '.$data->dosen->nama_belakang}}</td>
                         <td class="text-center">
@@ -52,6 +56,9 @@
                                 >
                                 <i class="bx bx-box me-1"></i> Detail</a
                               >
+
+
+                              @if(!Auth::user()->hasAnyRole(['mahasiswa', 'dosen']))
                               <a class="dropdown-item" href="{{ route('dashboard.magang.ubah', $data->id )}}"><i class="bx bx-edit-alt me-1"></i> Ubah</a
                               >
 
@@ -65,6 +72,7 @@
                                       <i class="bx bx-trash me-1"></i> Hapus
                                   </button>
                               </form>
+                            @endif
                             </div>
                           </div>
                           
