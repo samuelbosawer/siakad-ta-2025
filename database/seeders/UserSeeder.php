@@ -62,11 +62,11 @@ class UserSeeder extends Seeder
         $user->assignRole('mahasiswa');
 
         $user = User::create([
-            'nama' => 'Hasrul',
+            'nama' => 'septer',
             // 'alamat' => 'Sentani',
             // 'no_hp' => '082198159721',
-            'email' => 'hasrul@gmail.com',
-            'password' =>  bcrypt('hasrul@gmail.com'),
+            'email' => 'septer@gmail.com',
+            'password' =>  bcrypt('septer@gmail.com'),
             // 'jenis_kelamin' => '',
 
         ]);

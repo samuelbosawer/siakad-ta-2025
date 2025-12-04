@@ -15,14 +15,14 @@ class ProposalSeeder extends Seeder
     {
         DB::table('proposals')->insert([
             [
-                'judul'         => 'Proposal Penelitian Sistem Informasi 2025',
+                'judul'         => 'Sistem Informasi PUPR',
                 'berkas'        => null,
                 'status'        => 'Selesai',
                 'tanggal'           => '2025-01-12',
                 'mahasiswa_id'  => 1,   // sesuaikan dengan data di tabel mahasiswas
             ],
             [
-                'judul'         => 'Proposal Kegiatan Pengabdian Masyarakat',
+                'judul'         => 'SPK Pemilihan motor berbasis Web',
                 'berkas'        => null,
                 'status'        => 'Belum Selesai',
                 'tanggal'           => '2025-02-01',

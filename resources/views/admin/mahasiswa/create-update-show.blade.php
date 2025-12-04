@@ -96,7 +96,7 @@
                                         <option selected hidden>Pilih</option>
                                         <option value="Pria" @if (isset($data) && $data->jenis_kelamin == 'Pria') selected @endif>Pria
                                         </option>
-                                        <option value="Wanita">Wanita</option>
+                                        <option @if (isset($data) && $data->jenis_kelamin == 'Wanita') selected @endif value="Wanita">Wanita</option>
                                     </select>
                                     @error('jenis_kelamin')
                                         <small class="text-danger">{{ $message }}</small>

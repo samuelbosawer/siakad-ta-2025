@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Proposal;
 use App\Models\Skripsi;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -49,6 +50,13 @@ class SkripsiController extends Controller
     public function create()
     {
         $propsal = Proposal::orderBy('id', 'desc')->get();
+
+         if (Auth::user()->role('mahasiswa')) {
+            $user = Auth::user();
+            // Ambil ID mahasiswa dari relasi user → mahasiswa
+            $mahasiswaId = $user->mahasiswa->id;
+            $mahasiswas = Proposal::where('mahasiswa_id', $mahasiswaId)->get();
+        }
         return view('admin.skripsi.create-update-show', compact('propsal'));
     }
 
@@ -78,7 +86,7 @@ class SkripsiController extends Controller
     {
         $propsal = Proposal::orderBy('id', 'desc')->get();
         $data = Skripsi::where('id',$id)->first();
-        $judul = 'DETAIL SKRIPSIs';
+        $judul = 'DETAIL SKRIPSI';
         return view('admin.skripsi.create-update-show', compact('propsal','data','judul'));
     }
 
@@ -87,7 +95,7 @@ class SkripsiController extends Controller
     {
         $propsal = Proposal::orderBy('id', 'desc')->get();
         $data = Skripsi::where('id',$id)->first();
-        $judul = 'DETAIL SKRIPSIs';
+        $judul = 'DETAIL SKRIPSI';
         return view('admin.skripsi.create-update-show', compact('propsal','data','judul'));
     }
 

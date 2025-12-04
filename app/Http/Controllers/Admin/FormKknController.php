@@ -91,6 +91,13 @@ class FormKknController extends Controller
         $judul = 'TAMBAH DATA KKN MAHASISWA';
         $kkns = Kkn::orderBy('id', 'desc')->get();
         $mahasiswas = Mahasiswa::orderBy('id', 'desc')->get();
+        if (Auth::user()->role('mahasiswa')) {
+            $user = Auth::user();
+            // Ambil ID mahasiswa dari relasi user → mahasiswa
+            $mahasiswaId = $user->mahasiswa->id;
+            $mahasiswas = Mahasiswa::where('id', $mahasiswaId)->get();
+        }
+        
         return view('admin.form-kkn.create-update-show',compact('judul','kkns','mahasiswas'));
     }
 

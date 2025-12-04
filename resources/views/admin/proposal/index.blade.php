@@ -59,6 +59,9 @@
                                 >
                                 <i class="bx bx-box me-1"></i> Detail</a
                               >
+
+
+                                @if(!Auth::user()->hasAnyRole(['mahasiswa', 'dosen']))
                               <a class="dropdown-item" href="{{ route('dashboard.proposal.ubah', $data->id )}}"><i class="bx bx-edit-alt me-1"></i> Ubah</a
                               >
 
@@ -72,6 +75,8 @@
                                       <i class="bx bx-trash me-1"></i> Hapus
                                   </button>
                               </form>
+
+                              @endif
                             </div>
                           </div>
                           

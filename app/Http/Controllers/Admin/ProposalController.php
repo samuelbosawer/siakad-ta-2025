@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Mahasiswa;
 use App\Models\Proposal;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Storage;
 
@@ -14,7 +15,37 @@ class ProposalController extends Controller
     // Tampilkan semua data
     public function index(Request $request)
     {
-        $datas = Proposal::with('mahasiswa') // relasi ke mahasiswa
+
+         $user = Auth::user();
+
+        // Cek apakah role mahasiswa
+        if (Auth::user()->hasRole('mahasiswa')) {
+                    $mahasiswaId = $user->mahasiswa->id;
+
+                 $datas = Proposal::where('mahasiswa_id',$mahasiswaId)->with('mahasiswa') // relasi ke mahasiswa
+            ->when($request->s, function ($query) use ($request) {
+
+                $s = $request->s;
+
+                $query->where(function ($q) use ($s) {
+
+                    // Cari di kolom Proposal
+                    $q->where('judul', 'LIKE', '%' . $s . '%')
+                        ->orWhere('status', 'LIKE', '%' . $s . '%')
+                        ->orWhere('tanggal', 'LIKE', '%' . $s . '%');
+
+                    // Cari di relasi mahasiswa
+                    $q->orWhereHas('mahasiswa', function ($m) use ($s) {
+                        $m->where('nama_depan', 'LIKE', '%' . $s . '%')
+                            ->orWhere('nama_belakang', 'LIKE', '%' . $s . '%');
+                    });
+                });
+            })
+            ->orderBy('id', 'desc')
+            ->paginate(7);    
+
+        }else{
+            $datas = Proposal::with('mahasiswa') // relasi ke mahasiswa
             ->when($request->s, function ($query) use ($request) {
 
                 $s = $request->s;
@@ -35,6 +66,8 @@ class ProposalController extends Controller
             })
             ->orderBy('id', 'desc')
             ->paginate(7);
+        }
+        
 
         return view('admin.proposal.index', compact('datas'))
             ->with('i', (request()->input('page', 1) - 1) * 7);
@@ -44,6 +77,12 @@ class ProposalController extends Controller
     public function create()
     {
         $mahasiswas = Mahasiswa::orderBy('id', 'desc')->get();
+           if (Auth::user()->role('mahasiswa')) {
+            $user = Auth::user();
+            // Ambil ID mahasiswa dari relasi user → mahasiswa
+            $mahasiswaId = $user->mahasiswa->id;
+            $mahasiswas = Mahasiswa::where('id', $mahasiswaId)->get();
+        }
         return view('admin.proposal.create-update-show', compact('mahasiswas'));
     }
 

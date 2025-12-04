@@ -119,7 +119,7 @@
             </li>
 
           
-
+ @if(!Auth::user()->hasAnyRole(['mahasiswa', 'dosen']))
 
               <li class="menu-item @if (Request::segment(1) == 'dashboard' && Request::segment(2) == 'pengumuman') active @endif">
               <a href="{{ route('dashboard.pengumuman') }}" class="menu-link">
@@ -127,6 +127,8 @@
                 <div data-i18n="Analytics">Data Pengumuman </div>
               </a>
             </li>
+
+          @endif
 
               <li class="menu-item ">
               <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="menu-link">

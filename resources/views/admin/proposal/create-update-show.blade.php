@@ -56,21 +56,23 @@
 
 
 
+                                @if (!Auth::user()->hasRole('mahasiswa'))
+                                {{-- STATUS --}}
                                 <div class="col-md-6 mb-3">
-                                    <label for="status" class="form-label">Status</label>
-                                    <select name="status" class="form-select" id="exampleFormControlSelect1"
-                                        @if (Request::segment(3) == 'detail') disabled @endif>
+                                    <label class="form-label">Status</label>
+                                    <select name="status" class="form-select"
+                                        @if ($isDetail) disabled @endif>
                                         <option value="">Pilih</option>
-                                        <option value="Belum Selesai" @if (isset($data) && $data->status == 'Belum Selesai') selected @endif>
-                                            Belum Selesai</option>
-
-                                        <option value="Selesai" @if (isset($data) && $data->status == 'Selesai') selected @endif>Selesai
-                                        </option>
+                                        <option value="Belum Selesai" @selected(isset($data) && $data->status == 'Belum Selesai')>Belum Selesai</option>
+                                        <option value="Selesai" @selected(isset($data) && $data->status == 'Selesai')>Selesai</option>
                                     </select>
                                     @error('status')
                                         <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
+                            @else
+                                <input type="text" hidden value="Belum Selesai" name="status">
+                            @endif
 
                                 <div class="col-md-6 mb-3">
                                     <label for="tanggal" class="form-label">Tanggal</label>
@@ -105,9 +107,13 @@
 
                             <div class="col-md-12 mb-3 mx-auto">
                                 @if (Request::segment(3) == 'detail')
+
+                                @if(!Auth::user()->hasAnyRole(['mahasiswa', 'dosen']))
                                     <a href="{{ route('dashboard.proposal.ubah', $data->id) }}"
                                         class="btn btn-dark text-white">
                                         <i class="menu-icon tf-icons bx bx-pencil"></i> UBAH DATA </a>
+
+                                        @endif
                                 @elseif ((Request::segment(3) == 'tambah' || Request::segment(4) == 'ubah') && Request::segment(2) == 'proposal')
                                     <button type="submit" class="btn btn-primary text-white">SIMPAN <i
                                             class="menu-icon tf-icons bx bx-save"></i></button>

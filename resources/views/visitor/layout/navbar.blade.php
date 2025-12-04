@@ -34,9 +34,9 @@
             @endguest
 
             @auth
-                <form method="POST" action="{{ route('logout') }}">
+                <form class="p-4" method="POST" action="{{ route('logout') }}">
                     @csrf
-                    <button class="" type="submit">LOGOUNT</button>
+                    <button class=" btn btn-primary" type="submit">LOGOUT</button>
                 </form>
             @endauth
 
