@@ -80,6 +80,8 @@ class MahasiswaController extends Controller
         'nama' => $validated['nama_depan'],
     ]);
 
+    $user->assignRole('mahasiswa');
+
     // 3. Simpan ke tabel profil (sesuaikan nama modelnya)
     $profil = Mahasiswa::create([
         'user_id' => $user->id,

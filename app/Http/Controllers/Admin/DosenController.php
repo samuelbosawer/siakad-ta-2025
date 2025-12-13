@@ -82,6 +82,8 @@ class DosenController extends Controller
         'nama' => $validated['nama_depan'],
     ]);
 
+    $user->assignRole('dosen');
+
     // 3. Simpan ke tabel profil (sesuaikan nama modelnya)
     $profil = Dosen::create([
         'user_id' => $user->id,
